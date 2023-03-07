@@ -19,3 +19,4 @@
 .idea
 .venv/
 .vscode/
+*.drawio
