@@ -219,9 +219,6 @@ jobs:
     concurrency:
       group: ${{ github.workflow }}-build-docker-image-${{ github.ref_name }}
       cancel-in-progress: true
-    needs:
-      - tests-backend
-      - tests-frontend
     steps:
       -
         name: Check pushing to Docker Hub
@@ -305,11 +302,11 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm/v7,linux/arm64
+          platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.docker-meta.outputs.tags }}
           labels: ${{ steps.docker-meta.outputs.labels }}
-          # Get cache layers from this branch, then dev, then main
+          # Get cache layers from this branch, then dev
           # This allows new branches to get at least some cache benefits, generally from dev
           cache-from: |
             type=registry,ref=ghcr.io/${{ steps.set-ghcr-repository.outputs.ghcr-repository }}/builder/cache/app:${{ github.ref_name }}
@@ -336,6 +333,7 @@ jobs:
     needs:
       - build-docker-image
     runs-on: ubuntu-22.04
+    if: false
     steps:
       -
         name: Checkout
