@@ -549,7 +549,7 @@ class MailAccountHandler(LoggingMixin):
 
         self.log(
             "debug",
-            f"Rule {rule}: Searching folder with criteria {str(criterias)}",
+            f"Rule {rule}: Searching folder with criteria {criterias!s}",
         )
 
         try:

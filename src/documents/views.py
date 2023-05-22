@@ -517,7 +517,7 @@ class DocumentViewSet(
             try:
                 return Response(self.getNotes(doc))
             except Exception as e:
-                logger.warning(f"An error occurred retrieving notes: {str(e)}")
+                logger.warning(f"An error occurred retrieving notes: {e!s}")
                 return Response(
                     {"error": "Error retreiving notes, check logs for more detail."},
                 )
@@ -536,7 +536,7 @@ class DocumentViewSet(
 
                 return Response(self.getNotes(doc))
             except Exception as e:
-                logger.warning(f"An error occurred saving note: {str(e)}")
+                logger.warning(f"An error occurred saving note: {e!s}")
                 return Response(
                     {
                         "error": "Error saving note, check logs for more detail.",
@@ -626,7 +626,7 @@ class UnifiedSearchViewSet(DocumentViewSet):
             except NotFound:
                 raise
             except Exception as e:
-                logger.warning(f"An error occurred listing search results: {str(e)}")
+                logger.warning(f"An error occurred listing search results: {e!s}")
                 return HttpResponseBadRequest(
                     "Error listing search results, check logs for more detail.",
                 )
@@ -697,7 +697,7 @@ class BulkEditView(GenericAPIView):
             result = method(documents, **parameters)
             return Response({"result": result})
         except Exception as e:
-            logger.warning(f"An error occurred performing bulk edit: {str(e)}")
+            logger.warning(f"An error occurred performing bulk edit: {e!s}")
             return HttpResponseBadRequest(
                 "Error performing bulk edit, check logs for more detail.",
             )
