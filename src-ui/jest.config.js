@@ -4,5 +4,8 @@ module.exports = {
   },
   preset: 'jest-preset-angular',
   setupFilesAfterEnv: ['<rootDir>/setup-jest.ts'],
-  testPathIgnorePatterns: ['/node_modules/', '/cypress/'],
+  testPathIgnorePatterns: ['/node_modules/', '/e2e/'],
+  moduleNameMapper: {
+    '^src/(.*)': '<rootDir>/src/$1',
+  },
 }
