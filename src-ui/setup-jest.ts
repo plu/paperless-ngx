@@ -1,4 +1,8 @@
 import { jest } from '@jest/globals'
+import '@angular/localize/init'
+import { TextEncoder, TextDecoder } from 'util'
+global.TextEncoder = TextEncoder
+global.TextDecoder = TextDecoder
 
 /* global mocks for jsdom */
 const mock = () => {

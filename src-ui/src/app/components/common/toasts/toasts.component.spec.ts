@@ -3,7 +3,6 @@ import {
   discardPeriodicTasks,
   fakeAsync,
   flush,
-  tick,
 } from '@angular/core/testing'
 import { ToastService } from 'src/app/services/toast.service'
 import { ToastsComponent } from './toasts.component'
@@ -11,7 +10,6 @@ import { ComponentFixture } from '@angular/core/testing'
 import { HttpClientTestingModule } from '@angular/common/http/testing'
 import { of } from 'rxjs'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
-import '@angular/localize/init'
 
 describe('ToastsComponent', () => {
   let component: ToastsComponent
