@@ -44,7 +44,7 @@ whoosh="~=2.7"
 inotifyrecursive = "~=0.3"
 ocrmypdf = "~=14.0"
 tqdm = "*"
-tika = "*"
+tika-client = "*"
 channels = "~=4.0"
 channels-redis = "*"
 uvicorn = {extras = ["standard"], version = "*"}

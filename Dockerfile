@@ -238,6 +238,12 @@ RUN set -eux \
     && rm -rf /var/cache/apt/archives/* \
     && truncate -s 0 /var/log/*log
 
+COPY ./tika_client-0.0.1-py3-none-any.whl .
+
+RUN set -eux \
+    && python3 -m pip install --no-cache-dir ./tika_client-0.0.1-py3-none-any.whl \
+    && python3 -m pip list
+
 # copy backend
 COPY ./src ./
 

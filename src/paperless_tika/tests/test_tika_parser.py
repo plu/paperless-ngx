@@ -19,7 +19,7 @@ class TestTikaParser(TestCase):
     def tearDown(self) -> None:
         self.parser.cleanup()
 
-    @mock.patch("paperless_tika.parsers.parser.from_file")
+    @mock.patch("tika_client.TikaClient.rmeta.text.parse")
     @mock.patch("paperless_tika.parsers.requests.post")
     def test_parse(self, post, from_file):
         from_file.return_value = {
@@ -42,7 +42,7 @@ class TestTikaParser(TestCase):
 
         self.assertEqual(self.parser.date, datetime.datetime(2020, 11, 21))
 
-    @mock.patch("paperless_tika.parsers.parser.from_file")
+    @mock.patch("tika_client.TikaClient.metadata.from_file")
     def test_metadata(self, from_file):
         from_file.return_value = {
             "metadata": {"Creation-Date": "2020-11-21", "Some-key": "value"},
