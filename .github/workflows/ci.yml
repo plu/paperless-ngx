@@ -202,7 +202,10 @@ jobs:
         name: Linting checks
         run: cd src-ui && npm run lint
       -
-        name: Run Playwright tests
+        name: Run Jest unit tests
+        run: cd src-ui && npm run test
+      -
+        name: Run Playwright e2e tests
         run: cd src-ui && npx playwright test
       -
         name: Upload test results
