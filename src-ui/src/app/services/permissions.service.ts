@@ -43,8 +43,8 @@ export class PermissionsService {
     type: PermissionType
   ): boolean {
     return (
-      this.currentUser.is_superuser ||
-      this.permissions.includes(this.getPermissionCode(action, type))
+      this.currentUser?.is_superuser ||
+      this.permissions?.includes(this.getPermissionCode(action, type))
     )
   }
 
