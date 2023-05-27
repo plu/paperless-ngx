@@ -16,7 +16,8 @@ import { debounceTime, distinctUntilChanged, filter } from 'rxjs/operators'
 import { DocumentTypeService } from 'src/app/services/rest/document-type.service'
 import { TagService } from 'src/app/services/rest/tag.service'
 import { CorrespondentService } from 'src/app/services/rest/correspondent.service'
-import { filterRulesDiffer, FilterRule } from 'src/app/data/filter-rule'
+import { FilterRule } from 'src/app/data/filter-rule'
+import { filterRulesDiffer } from 'src/app/utils/filter-rules'
 import {
   FILTER_ADDED_AFTER,
   FILTER_ADDED_BEFORE,
