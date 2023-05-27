@@ -231,7 +231,7 @@ jobs:
         run: cd src-ui && npm ci
       -
         name: Install Playwright
-        run: npx playwright install --with-deps
+        run: npx playwright install --with-deps chromium
       -
         name: Linting checks
         run: cd src-ui && npm run lint
