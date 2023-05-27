@@ -1,5 +1,5 @@
 import { jest } from '@jest/globals'
-if (process.argv.join('').includes('.bin/jest')) {
+if (process.env.NODE_ENV === 'test') {
   require('jest-preset-angular/setup-jest')
 }
 import '@angular/localize/init'
