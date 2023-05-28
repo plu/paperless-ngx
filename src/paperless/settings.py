@@ -502,6 +502,9 @@ if os.getenv("PAPERLESS_DBHOST"):
     }
     if os.getenv("PAPERLESS_DBPORT"):
         DATABASES["default"]["PORT"] = os.getenv("PAPERLESS_DBPORT")
+    if os.getenv("PAPERLESS_DBPASS_FILE"):
+        with open(os.getenv("PAPERLESS_DBPASS_FILE")) as f:
+            DATABASES["default"]["PASSWORD"] = f.readline().strip()
 
     # Leave room for future extensibility
     if os.getenv("PAPERLESS_DBENGINE") == "mariadb":
