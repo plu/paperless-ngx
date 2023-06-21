@@ -34,13 +34,23 @@ from documents.signals import document_consumer_declaration
 
 # TODO: isnt there a date parsing library for this?
 
-DATE_REGEX = re.compile(
-    r"(\b|(?!=([_-])))([0-9]{1,2})[\.\/-]([0-9]{1,2})[\.\/-]([0-9]{4}|[0-9]{2})(\b|(?=([_-])))|"  # noqa: E501
-    r"(\b|(?!=([_-])))([0-9]{4}|[0-9]{2})[\.\/-]([0-9]{1,2})[\.\/-]([0-9]{1,2})(\b|(?=([_-])))|"  # noqa: E501
-    r"(\b|(?!=([_-])))([0-9]{1,2}[\. ]+[^ ]{3,9} ([0-9]{4}|[0-9]{2}))(\b|(?=([_-])))|"  # noqa: E501
-    r"(\b|(?!=([_-])))([^\W\d_]{3,9} [0-9]{1,2}, ([0-9]{4}))(\b|(?=([_-])))|"
-    r"(\b|(?!=([_-])))([^\W\d_]{3,9} [0-9]{4})(\b|(?=([_-])))|"
-    r"(\b|(?!=([_-])))(\b[0-9]{1,2}[ \.\/-][A-Z]{3}[ \.\/-][0-9]{4})(\b|(?=([_-])))",  # noqa: E501
+DATE_REGEX = (
+    re.compile(
+        r"(\b|(?!=([_-])))([0-9]{1,2})[\.\/-]([0-9]{1,2})[\.\/-]([0-9]{4}|[0-9]{2})(\b|(?=([_-])))",
+    ),
+    re.compile(
+        r"(\b|(?!=([_-])))([0-9]{4}|[0-9]{2})[\.\/-]([0-9]{1,2})[\.\/-]([0-9]{1,2})(\b|(?=([_-])))",
+    ),
+    re.compile(
+        r"(\b|(?!=([_-])))([0-9]{1,2}[\. ]+[^ ]{3,9} ([0-9]{4}|[0-9]{2}))(\b|(?=([_-])))",  # noqa: E501
+    ),
+    re.compile(
+        r"(\b|(?!=([_-])))([^\W\d_]{3,9} [0-9]{1,2}, ([0-9]{4}))(\b|(?=([_-])))",
+    ),
+    re.compile(r"(\b|(?!=([_-])))([^\W\d_]{3,9} [0-9]{4})(\b|(?=([_-])))"),
+    re.compile(
+        r"(\b|(?!=([_-])))(\b[0-9]{1,2}[ \.\/-][A-Z]{3}[ \.\/-][0-9]{4})(\b|(?=([_-])))",  # noqa: E501
+    ),
 )
 
 
@@ -285,10 +295,11 @@ def parse_date_generator(filename, text) -> Iterator[datetime.datetime]:
         return __filter(date)
 
     def __process_content(content: str, date_order: str) -> Iterator[datetime.datetime]:
-        for m in re.finditer(DATE_REGEX, content):
-            date = __process_match(m, date_order)
-            if date is not None:
-                yield date
+        for r in DATE_REGEX:
+            for m in re.finditer(r, content):
+                date = __process_match(m, date_order)
+                if date is not None:
+                    yield date
 
     # if filename date parsing is enabled, search there first:
     if settings.FILENAME_DATE_ORDER:
